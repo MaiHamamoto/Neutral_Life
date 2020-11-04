@@ -1,0 +1,97 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <script language="JavaScript" type="text/javascript" src="{{constant('shopping\\Bootstrap::APP_URL')}}js/jquery-3.2.1.min.js"></script>
+        <link href="{{constant('shopping\\Bootstrap::APP_URL')}}css/css/ress.css" rel="stylesheet" type="text/css" />
+        <link href="{{constant('shopping\\Bootstrap::APP_URL')}}css/css/confirm.css" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&family=Orbitron&family=Press+Start+2P&family=Titillium+Web&display=swap" rel="stylesheet">
+        <script src="https://kit.fontawesome.com/6ddd616ad6.js" crossorigin="anonymous"></script>
+        <title>Member Registration Confirmation</title>
+    </head>
+    <body>
+        <div id="container">
+            <div id="TopTitle"><h1><a href="http://localhost:8888/DT/shopping/list.php">Neutral Life</a></h1></div>
+            <div id="product_search">
+                <form method="post" action="search.php">
+                    <input type="search" placeholder="Search" name="keyword" value="">
+                    <button type="submit" class="font-awesome_submit"><i class="fas fa-search"></i></button>
+                </form>
+            </div>    
+
+            <h2>Membership Registration Confirmation</h2>
+                <hr class="hr_01">
+                    <form method="post" action="confirm.php">
+                        <div id="ConfirmForm">    
+                            <table>
+                            <tr>
+                                <th class="Name">Name : </th>
+                                    <td>{{dataArr.family_name}} {{dataArr.first_name}}</td>
+                            </tr>
+                            <tr>
+                                <th class="Hiragana">Name(Hiragana) : </th>
+                                    <td>{{dataArr.family_name_kana}} {{dataArr.first_name_kana}}</td>
+                            </tr>
+                            <tr>
+                                <th class="Sex">Sex : </th>
+                                    <td>
+                                        {%if dataArr.sex == '1' %}Male{% elseif dataArr.sex == '2' %}Female{% endif %}</td>
+                            </tr>
+                            <tr>
+                                <th class="DateOfBirth">Date of birth : </th>
+                                    <td>{{dataArr.year}}年 {{dataArr.month}}月 {{dataArr.day}}日</td>
+                            </tr>
+                            <tr>
+                                <th class="ZipCode">Zip code : </th>
+                                    <td>{{dataArr.zip1}} - {{dataArr.zip2}}</td>
+                            </tr>
+                            <tr>
+                                <th class="Address">Address : </th>
+                                    <td>{{dataArr.address}}</td>
+                            </tr>
+                            <tr>
+                                <th class="MailAddress">Mail address : </th>
+                                    <td>{{dataArr.email}}</td>
+                            </tr>
+                            <tr>
+                                <th class="PhoneNumber">Phone number : </th>
+                                    <td>{{dataArr.tel1}} - {{dataArr.tel2}} - {{dataArr.tel3}}</td>
+                            </tr>
+                            <!-- <tr>
+                                <th class="Transportation">Transportation : </th>
+                                    <td>
+                                        {% for index in dataArr.traffic %}
+                                            {{trafficArr[index]}}<br>
+                                        {% endfor %}
+                                    </td>
+                            </tr> -->
+                            <!-- <tr>
+                                <th class="RemarksColumn">Remarks column : </th>
+                                    <td>{{dataArr.contents|nl2br}}</td>
+                            </tr> -->
+                        </table>
+                               {% for key,value in dataArr %}
+                                <!-- ↓下記メソッドで配列か否かをチェックしている -->
+                                {% if value is iterable %}
+                                    {% for v in value %}
+                                        <input type="hidden" name="{{key}}[]" value="{{v}}" />
+                                    {% endfor %}
+                                        {% else %}
+                                            <input type="hidden" name="{{key}}" value="{{value}}" />
+                                {% endif %}
+                                    {% endfor %}                       
+
+                            <div class="BackButton"><input type="submit" name="back"     value="BACK" /></div>
+                            <div class="CompleteButton"><input type="submit" name="complete" value="COMPLETE !" /></div>   
+                    </form>
+                    
+                    <hr class="hr_footer">
+
+                    <footer>                      
+                        <div id="footer">    
+                            <section class="Twitter"><a href="https://twitter.com/Neutral_Colour"><span class="TwitterFont"><i class="fab fa-twitter"></i></span></a></section>
+                            <section class="Copyright"><small>&copy; 2020 Neutral Colour</small></section>  
+                        </div>                  
+                    </footer>    
+        </div>    
+    </body>
+</html>

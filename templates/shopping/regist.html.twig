@@ -1,0 +1,166 @@
+<html>
+    <head>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <script language="JavaScript" type="text/javascript" src="{{constant('shopping\\Bootstrap::APP_URL')}}js/jquery-3.2.1.min.js"></script>
+        <script language="JavaScript" type="text/javascript" src="{{constant('shopping\\Bootstrap::APP_URL')}}js/common.js"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&family=Orbitron&family=Press+Start+2P&family=Titillium+Web&display=swap" rel="stylesheet">
+        <link href="{{constant('shopping\\Bootstrap::APP_URL')}}css/css/regist.css" rel="stylesheet" type="text/css" />
+        <script src="https://kit.fontawesome.com/6ddd616ad6.js" crossorigin="anonymous"></script>
+        <title>Membership Registration</title>
+    </head>
+    <body>
+        <div id="container">
+            <div id="TopTitle"><h1><a href="http://localhost:8888/DT/shopping/list.php">Neutral Life</h1></a></div> 
+                <div id="product_search">
+                    <form method="post" action="search.php">
+                        <input type="search" placeholder="Search" name="keyword" value="">
+                        <button type="submit" class="font-awesome_submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+
+        <h2>Membership Registration</h2>
+        <hr class="hr_01">
+            <input type="hidden" name="entry_url" id="entry_url" value="{{constant('shopping\\Bootstrap::ENTRY_URL')}}">
+            <form method="post" action="confirm.php">
+                <div id="MemberInputForm">
+                    <table>
+                        <tr>
+                            <th>Name ( family name, first name )<span class="redAsterisk"> ＊ </span></th><br>
+                                <td>
+                                    <input type="text" name="family_name" value="{{dataArr.family_name}}" />
+                                    <input type="text" name="first_name"  value="{{dataArr.first_name}}" />
+                                </td> 
+                                <td>        
+                                    {% if errArr.family_name | length > 0 %}<br><span class="ErrorFamilyName">{{ errArr.family_name }}</span>{% endif %}    
+                                    {% if errArr.first_name | length > 0 %}<br><span class="ErrorFirstName">{{ errArr.first_name }}</span>{% endif %}
+                                </td>
+                        </tr>
+                        <tr>
+                            <th>Hiragana</th>
+                                <td>
+                                    <input type="text" name="family_name_kana" value="{{dataArr.family_name_kana}}" />
+                                    <input type="text" name="first_name_kana"  value="{{dataArr.first_name_kana}}" />
+                                </td>
+                        </tr>
+                        <tr>
+                            <th>Sex<span class="redAsterisk"> ＊ </span></th>
+                                <td>
+                                    {% for index, label in sexArr %}
+                                        <input type="radio" name="sex" value="{{index}}" id="sex_{{index}}" {% if dataArr.sex == index %} checked="checked" {% endif %}>
+                                        <label for="sex_2">{{label}}</label>
+                                    {% endfor %}
+                                </td>
+                                <td>    
+                                    {% if errArr.sex | length > 0 %}<br><span class="ErrorSex">{{errArr.sex}}</span>{% endif %}
+                                </td>
+                        </tr>
+                        <tr>
+                            <th>Date of birth<span class="redAsterisk"> ＊ </span></th>
+                                <td class="DateOfBirth">
+                                    <select name="year" >
+                                        {% for index, label in yearArr %}
+                                            <option value="{{index}}" {% if dataArr.year == index %} selected {% endif %}>{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+
+                                    <select name='month'>
+                                        {% for index, label in monthArr %}
+                                            <option value="{{index}}" {% if dataArr.month == index %} selected {% endif %}>{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+
+                                    <select name='day'>
+                                        {% for index, label in dayArr %}
+                                            <option value="{{index}}" {% if dataArr.day == index %} selected {% endif %}>{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </td>
+                                <td>
+                                    {% if errArr.year | length > 0 %}<br><span class="ErrorYear">{{errArr.year}}</span>{% endif %}
+                                    {% if errArr.month | length > 0 %}<br><span class="ErrorMonth">{{errArr.month}}</span>{% endif %}
+                                    {% if errArr.day | length > 0 %}<br><span class="ErrorDay">{{errArr.day}}</span>{% endif %}
+                                </td>
+                        </tr>
+                        <tr>
+                            <th>Zip code<span class="redAsterisk"> ＊ </span></th>
+                                <td>
+                                    <input type="text" name="zip1" value="{{dataArr.zip1}}" id="zip1" size="3" maxlength="3" /><span class="ZipCodeHaifun">-</span>
+                                    <input type="text" name="zip2" value="{{dataArr.zip2}}" id="zip2" size="4" maxlength="4" />
+                                    <input type="button" name="address_search" value="Input an address from 〒" id="address_search" />
+                                </td>
+                                <td>    
+                                    {% if errArr.zip1 | length > 0 %}<br><span class="ErrorZipCode01">{{errArr.zip1}}</span>{% endif %}
+                                    {% if errArr.zip2 | length > 0 %}<br><span class="ErrorZipCode02">{{errArr.zip2}}</span>{% endif %}
+                                </td>
+                        </tr>
+                        <tr>
+                            <th>Address<span class="redAsterisk"> ＊ </span></th>
+                                <td>
+                                    <input type="text" name="address" value="{{dataArr.address}}" id="address" size="40" />
+                                </td>
+                                <td>        
+                                    {% if errArr.address | length > 0 %}<br><span class="ErrorAddress">{{errArr.address}}</span>{% endif %}
+                                </td>
+                        </tr>
+                        <tr>
+                            <th>Mail address<span class="redAsterisk"> ＊ </span></th>
+                                <td>
+                                    <input type="text" name="email" value="{{dataArr.email}}" size="40" />
+                                </td>    
+                                <td>    
+                                    {% if errArr.email | length > 0 %}<br><span class="ErrorEmail">{{errArr.email}}</span>{% endif %}
+                                </td>
+                        </tr>
+                        <tr>
+                            <th>Password<span class="redAsterisk"> ＊ </span></th>
+                                <td>
+                                    <input type="password" name="password" value="{{dataArr.password}}" size="40" />
+                                </td>
+                                <td>        
+                                    {% if errArr.password | length > 8 %}<br><span class="ErrorPassword">{{errArr.password}}</span>{% endif %}
+                                </td>
+                        </tr>
+                        <tr>
+                            <th>Phone number<span class="redAsterisk"> ＊ </span></th>
+                                <td>
+                                    <input type="text" name="tel1" value="{{dataArr.tel1}}" size="6" maxlength="6" /><span class="TelHaifun01"> -</span>
+                                    <input type="text" name="tel2" value="{{dataArr.tel2}}" size="6" maxlength="6" /><span class="TelHaifun02"> -</span>
+                                    <input type="text" name="tel3" value="{{dataArr.tel3}}" size="6" maxlength="6" />
+                                </td>    
+                                <td>    
+                                    {% if errArr.tel1 | length > 0 %}<br><span class="ErrorTel">{{errArr.tel1}}</span>{% endif %}
+                                    {% if errArr.tel2 | length > 0 %}<br><span class="red">{{errArr.tel2}}</span>{% endif %}
+                                    {% if errArr.tel3 | length > 0 %}<br><span class="red">{{errArr.tel3}}</span>{% endif %}
+                                </td>
+                        </tr>
+                        <!-- <tr>
+                            <th>Transportation<span class="redAsterisk"> ＊ </span></th>
+                                <td>
+                                    {% for index, label in trafficArr %}
+                                        <input type="checkbox" name="traffic[]" value="{{index}}" id="traffic_{{index}}" {% if index in dataArr.traffic %} checked="checked" {% endif %}>
+                                        <label for="traffic_{{index}}">{{ label }}</label>
+                                    {% endfor %}
+                                </td>
+                                <td>    
+                                    {% if errArr.traffic | length > 0 %}<br><span class="ErrorTraffic">{{errArr.traffic}}</span>{% endif %}
+                                </td>
+                        </tr> -->
+                        <tr>
+                          <!-- <th>Remarks column</th>
+                                <td><textarea name="contents" rows="4" cols="40">{{dataArr.contents}}</textarea></td>
+                        </tr> -->
+                    </table>
+                </div> 
+                <div class="CheckButton"><input type="submit" name="confirm" value="CONFIRM" /></div>
+                <div class="TopButton"><input type="button" value="BACK" onclick="location.href='http://localhost:8888/DT/shopping/list.php'; return false;" ></input></div>
+            </form> 
+                <hr class="hr_footer">                                   
+                <footer>
+                    <div id="footer">    
+                        <section class="Twitter"><a href="https://twitter.com/Neutral_Colour"><span class="TwitterFont"><i class="fab fa-twitter"></i></span></a></section>
+                        <section class="Copyright"><small>&copy; 2020 Neutral Colour</small></section>  
+                    </div>                  
+                </footer>    
+        </div>
+    </body>
+</html>

@@ -1,0 +1,94 @@
+<html>
+ <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <script language="javascript" type="text/javascript" src="{{constant('shopping\\Bootstrap::APP_URL')}}js/jquery-3.2.1.min.js"></script>  
+    <script language="JavaScript" type="text/javascript" src="{{constant('shopping\\Bootstrap::APP_URL')}}js/jquery-3.5.1.min.js"></script>
+    <script language="JavaScript" type="text/javascript" src="{{constant('shopping\\Bootstrap::APP_URL')}}js/shopping.js"></script> 
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat+Subrayada:wght@700&family=Orbitron&family=Press+Start+2P&family=Titillium+Web&display=swap" rel="stylesheet">
+    <link href="{{constant('shopping\\Bootstrap::APP_URL')}}css/css/ress.css" rel="stylesheet" type="text/css" />
+    <link href="{{constant('shopping\\Bootstrap::APP_URL')}}css/css/shopping_cart.css" rel="stylesheet" type="text/css" /> 
+    <script src="https://kit.fontawesome.com/6ddd616ad6.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css" type="text/css" media="all" />
+ </head>
+    <body>
+        <div id="container">
+            <input type="hidden" name="entry_url" value="{{constant('shopping\\Bootstrap::ENTRY_URL')}}" id="entry_url">
+                <div id="TopTitle"><h1><a href="http://localhost:8888/DT/shopping/list.php">Neutral Life</h1></a></div> 
+                    <div id="product_search">
+                        <form method="post" action="search.php">
+                        <input type="search" placeholder="Search" name="keyword" value="">
+                        <button type="submit" class="font-awesome_submit"><i class="fas fa-search"></i></button>
+                        </form>
+                    </div>
+                    {% if userdata.login is defined and userdata.login == true %}
+                    <div id="TopPageName">
+                        <p class="WelcomeName">Welcome! {{userdata.family_name}}{{userdata.first_name}}さん</p>
+                        <input type="button" value="LOGOUT" onclick="location.href='logout.php'">
+                    </div>
+                    {% else %}
+                    <div id="Login">
+                        <a href="regist.php"><p class="touroku"><i class="fas fa-user-circle faa-float animated"></i> 会員登録はこちら</p></a>
+                        <p class="Login_member">Login</p>
+                        <form method="post" action="login_check.php">
+                            <p class="login_addres">Login Mailaddress</p>
+                            <input type="text" name="email">
+                            <p class="login_password">password</P>
+                            <input type="password" name="password">
+                                {{error_msg}}
+                                    <input type="submit" value="LOGIN"></<input>
+                                    <input type="button" value="BACK" onclick="location.href='http://localhost:8888/DT/shopping/list.php'; return false;" ></input>
+                        </form>
+                </div>
+                    {% endif %}
+
+                    <div id="cart_name">
+                        <hr class="hr_Top">
+                            <p class="MyCart"> My Cart</p>
+                                <hr class="hr_02">
+                    </div>
+                    {% if dataArr | length == 0 %}
+                        <p>カートに商品は入っていません</p>
+                            {% else %}
+                                <div id="cart_list">
+                                    {% for value in dataArr %}
+                                    <div class="cart_box">    
+                                        <ul class="item">
+                                            <li class="image"><img src="{{constant('shopping\\Bootstrap::ENTRY_URL')}}images/{{value.image}}" alt="{{value.item_name}}" /></li>
+                                            <li class="name">{{value.item_name}}</li>
+                                            <li class="price">&yen;{{value.price|number_format(0, '.', ',')}}</li>
+                                            <li class="delete_item"><a href="{{constant('shopping\\Bootstrap::ENTRY_URL')}}cart.php?crt_id={{value.crt_id}}">Delete</a></li>
+                                        </ul>
+                                    </div>        
+                                    {% endfor %}
+                                </div>
+                                {% endif %}
+                                    <p class="CartIn_Products_Price">カート内商品数 : {{sumNum}}個<br>合計金額 : &yen;{{sumPrice|number_format(0, '.', ',')}}</p> 
+                                    
+                                    <section class="ToTop">
+                                        <a href="#">TOP</a>
+                                    </section>
+
+                                    <hr class="hr_footer">
+
+                                    <footer>
+                                        <div id="footer">  
+                                            <section class="Twitter"><a href="https://twitter.com/Neutral_Colour"><span class="TwitterFont"><i class="fab fa-twitter faa-wrench animated-hover"></i></span></a></section>
+                                            <section class="Copyright"><small>&copy; 2020 Neutral Colour</small></section> 
+                                        </div>                  
+                                    </footer>    
+        </div>
+            <script>
+                $(function(){
+                    $('a[href^="#"]').click(function(){
+                        var adjust = 0;
+                        var speed = 600;
+                        var href= $(this).attr("href");
+                        var target = $(href == "#" || href == "" ? 'html' : href);
+                        var position = target.offset().top;
+                        $('body,html').animate({scrollTop:position}, speed, 'swing');
+                        return false;
+                    });
+                });
+            </script>
+    </body>
+</html>

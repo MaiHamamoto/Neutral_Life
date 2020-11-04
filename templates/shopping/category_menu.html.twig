@@ -1,0 +1,8 @@
+     <nav>
+        <ul class="list_category_nav">
+            <li><a href="{{constant('shopping\\Bootstrap::ENTRY_URL')}}list.php">All</a></li>
+                {% for value in cateArr %}
+            <li><a href="{{constant('shopping\\Bootstrap::ENTRY_URL')}}list.php?ctg_id={{value.ctg_id}}">{{value.category_name}}</a></li>
+                {% endfor %}
+        </ul>
+     </nav>
