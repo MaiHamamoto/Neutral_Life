@@ -26,7 +26,10 @@
 
 # 【ポートフォリオサンプル写真】
 
+- PCサイズ(1080px)
 <img width="1073" alt="スクリーンショット 2021-02-18 16 13 34" src="https://user-images.githubusercontent.com/57207352/108319133-464fc280-7204-11eb-8c25-216d796e3545.png">
 
 <br>
-
+- tabletサイズ(768px)
+<img width="877" alt="スクリーンショット 2021-02-18 16 15 40" src="https://user-images.githubusercontent.com/57207352/108319943-81062a80-7205-11eb-81d5-35a9258ab962.png">
+<br>
