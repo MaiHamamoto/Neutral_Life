@@ -42,3 +42,5 @@
 - 商品カートページ
 <img width="866" alt="スクリーンショット 2021-02-18 16 18 03" src="https://user-images.githubusercontent.com/57207352/108321059-faeae380-7206-11eb-80d2-7b9b318df217.png">
 
+- 会員登録ページ
+<img width="864" alt="スクリーンショット 2021-02-18 16 18 50" src="https://user-images.githubusercontent.com/57207352/108321318-55843f80-7207-11eb-939e-45d6a7ad85ab.png">
