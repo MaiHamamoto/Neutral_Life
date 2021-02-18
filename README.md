@@ -39,3 +39,6 @@
 - 商品詳細ページ
 <img width="868" alt="スクリーンショット 2021-02-18 16 17 01" src="https://user-images.githubusercontent.com/57207352/108320296-f7a32800-7205-11eb-899c-63cad2339291.png">
 
+- 商品カートページ
+<img width="866" alt="スクリーンショット 2021-02-18 16 18 03" src="https://user-images.githubusercontent.com/57207352/108321059-faeae380-7206-11eb-80d2-7b9b318df217.png">
+
