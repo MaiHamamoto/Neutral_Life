@@ -32,4 +32,8 @@
 
 - tabletサイズ(768px)
 <img width="877" alt="スクリーンショット 2021-02-18 16 15 40" src="https://user-images.githubusercontent.com/57207352/108319943-81062a80-7205-11eb-81d5-35a9258ab962.png">
-<br>
+
+
+- 商品詳細ページ
+- <img width="868" alt="スクリーンショット 2021-02-18 16 17 01" src="https://user-images.githubusercontent.com/57207352/108320296-f7a32800-7205-11eb-899c-63cad2339291.png">
+
